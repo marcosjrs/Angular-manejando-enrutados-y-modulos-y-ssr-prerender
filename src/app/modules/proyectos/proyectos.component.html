@@ -1,1 +1,20 @@
-<p>proyectos works!</p>
+<div class="row">
+  <div class="col-12 col-md-4" *ngFor="let proyecto of data">
+    <div class="card" style="width: 100%;">
+      <img [src]="proyecto.img" class="card-img-top" [alt]="proyecto.img">
+      <div class="card-body">
+        <h5 class="card-title">{{proyecto.nombre}}</h5>
+        <p class="card-text">{{proyecto.descripcion}}</p>
+        <div>
+          <span *ngFor="let tecno of proyecto.tecnologias" class="badge rounded-pill bg-info mx-1">{{tecno}}</span>
+        </div>
+        <div class="my-3">
+          <a [href]="proyecto.url" target="_blank" class="btn w-100 btn-warning">Visitar aplicación</a>
+        </div>
+        <div>
+          <a [routerLink]="'informacion/'+getURI(proyecto.nombre)" class="btn w-100 btn-success">Ver detalles</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

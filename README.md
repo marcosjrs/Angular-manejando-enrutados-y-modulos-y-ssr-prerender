@@ -1,6 +1,51 @@
 # AngularRouting
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.6.
+- Crea modulos y el componente principal de cada módulo
+```
+ng g m modules/contacto --routing
+ng g c modules/contacto
+ng g m modules/proyectos --routing
+ng g c modules/proyectos
+ng g m modules/about --routing
+ng g c modules/about
+```
+
+- Modificar el app-routing.module.ts para cargar de forma perezosa, cada módulo...
+```
+const routes: Routes = [
+  { 
+    path: 'about', 
+    loadChildren: () => import("./modules/about/about.module").then(m => m.AboutModule) ,
+    pathMatch: 'full'    //para cuando el path debe ser tal cual ese.. (pruebas)
+  }, 
+  { 
+    path: 'contacto', 
+    loadChildren: () => import("./modules/contacto/contacto.module").then(m => m.ContactoModule) 
+  }, 
+  { 
+    path: 'proyectos', 
+    loadChildren: () => import("./modules/proyectos/proyectos.module").then(m => m.ProyectosModule) 
+  }, 
+  { 
+    path: '**', 
+    redirectTo: 'proyectos' 
+  }
+];
+```
+
+- Y dentro de cada routing de los tres modulos cargamos por defecto su componente principal, por ejemplo en el proyectos-routing.module, pondríamos:
+```
+const routes: Routes = [
+  { path:'', component: ProyectosComponent }
+]; 
+```
+
+En la vista en lugar de href , usamos routerLink (hay que importar el modulo RouterModule en el modulo donde se cargue) :
+ [routerLink]="['/proyectos']" routerLinkActive="active"   // o sin  [/] 
+
+(Con pathMatch: 'full'  hacemos que la ruta tenga que ser exactamente esa.)
+Fin de enrutado "normal"
+
 
 ## Development server
 
