@@ -31,7 +31,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.sass"
+              "src/styles.sass",
+              "src/assets/theme/lux/bootstrap.min.css"
             ],
             "scripts": []
           },
