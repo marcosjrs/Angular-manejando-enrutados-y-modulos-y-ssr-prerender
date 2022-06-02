@@ -10,7 +10,7 @@ import { SharedModule } from './modules/shared/shared.module';
     AppComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     SharedModule
   ],

@@ -79,10 +79,26 @@ this.router.navigate(['/proyectos']);
 
 ```
 
+## SSR
+
+Se ha ejecutado `ng add @nguniversal/express-engine` para añadir SSR. 
+Ahora ya podemos arrancarlo con  `npm run dev:ssr` (esto solo en desarrollo en PRO: `npm run serve:ssr`)
+
+Otra técnica sería con  `npm run prerender`, que sería más para páginas y rutas más estáticas (no para enrutados dinámicos como los de proyectos/informacion/:id), para un blog por ejemplo no sería bueno, por tener un numero de rutas dinámicas exagerado.
+
+Para desplegar esto ultimo en netlify, una vez ejecutado `npm run prerender`, vamos a netlify, pulsamos en "Sites" y al final de nuestros sites encontramos un lugar a donde arrastrar la carpeta dist\angular-routing\browser que generó el prerender, esperamos a que suba y ya está.
+
+En PRODUCCIÓN, el SSR supone configuraciones en el servidor, el prerender no, por eso algunos prefieren el prerender, ya que tambien mejora en SEO.
+
+Más info: `https://angular.io/guide/universal`
+
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+
+
 
 ## Code scaffolding
 
