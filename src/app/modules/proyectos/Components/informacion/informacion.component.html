@@ -1,0 +1,24 @@
+<div *ngIf="proyecto.img" class="row">
+  <div class="col-12 col-md-4">
+    <img [src]="proyecto.img" [alt]="proyecto.nombre" class="img-thumbnail rounded">
+    <h2>{{proyecto.nombre}}</h2>
+    <div class="my-3">
+      <a [href]="proyecto.url" target="_blank" class="btn w-100 btn-warning">Visitar aplicación</a>
+    </div>
+  </div>
+  <div class="col-12 col-md-8">
+    <h2>Descripción</h2>
+    <hr>
+    <p>{{proyecto.descripcion}}</p>
+
+    <h2>Tecnologías</h2>
+    <hr>
+    <ul class="list-group">
+      <li *ngFor="let tecno of proyecto.tecnologias" class="list-group-item list-group-item-action">
+        {{tecno}}
+      </li>
+    </ul>
+    <button (click)="irAProyectos()" type="button" class="btn btn-info w-100 my-3">Volver a los proyectos</button>
+  </div>
+</div>
+<pre>{{proyecto|json}}</pre>

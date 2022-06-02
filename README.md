@@ -46,6 +46,39 @@ En la vista en lugar de href , usamos routerLink (hay que importar el modulo Rou
 (Con pathMatch: 'full'  hacemos que la ruta tenga que ser exactamente esa.)
 Fin de enrutado "normal"
 
+Para el enrutado dinamico (ruta proyectos/informacion/[id del proyecto]), que responde a subruta de proyectos, se creo componente dentro del modulo proyectos en una carpeta components
+ng g component modules/proyectos/Components/Informacion
+
+y se modificó el proyectos-routing.module, quedando:
+```
+const routes: Routes = [
+  { path:'', component: ProyectosComponent },
+  { path:'informacion/:id', component: InformacionComponent },
+]; 
+```
+
+Para la recogida del id del proyecto usamos el servicio ActivedRoute, inyectandolo en el InformacionComponent:
+```
+constructor(private activatedRoute:ActivatedRoute){ 
+  activatedRoute.params.subscribe(({id}) => (this.parametro = decodeURI(id+'') ));
+}
+```
+
+Para crear los links en el navbar, reemplazando los href, se usaron (previamente se importó el RouterModule en shared.module.ts):
+```
+[routerLink]="'informacion/'+getURI(proyecto.nombre)"   // en el component tenemos la función:    getURI(uri:string){   return encodeURI(uri);    }
+```
+
+
+Para ir a una ruta (url) que tenemos configurada:
+```
+//es con el servicio Router
+constructor( private router:Router, ...)
+//luego podemos usar su función navigate
+this.router.navigate(['/proyectos']);
+
+```
+
 
 ## Development server
 

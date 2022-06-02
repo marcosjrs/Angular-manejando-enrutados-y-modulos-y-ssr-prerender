@@ -12,4 +12,8 @@ export class ProyectosService {
   get data(){
     return this._data;
   }
+
+  getById(id:string){
+    return this._data.find((item)=>id===item.nombre);
+  }
 }
