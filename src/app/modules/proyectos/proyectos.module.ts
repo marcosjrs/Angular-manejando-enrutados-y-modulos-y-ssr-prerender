@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { InformacionComponent } from './components/informacion/informacion.component';
 import { ProyectosRoutingModule } from './proyectos-routing.module';
-import { ProyectosComponent } from './proyectos.component';
-import { InformacionComponent } from './Components/informacion/informacion.component';
+import { ListadoComponent } from './components/listado/listado.component';
 
 
 @NgModule({
   declarations: [
-    ProyectosComponent,
+    ListadoComponent,
     InformacionComponent
   ],
   imports: [

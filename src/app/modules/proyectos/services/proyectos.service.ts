@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
 import {proyectos} from 'src/app/modules/shared/data/Proyectos.data';
 
 @Injectable({
@@ -13,7 +14,7 @@ export class ProyectosService {
     return this._data;
   }
 
-  getById(id:string){
-    return this._data.find((item)=>id===item.nombre);
+  getById(id:string){    
+    return of(this._data.find((item)=>id===item.nombre));
   }
 }

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ProyectosService } from './services/proyectos.service';
+import { ProyectosService } from '../../services/proyectos.service';
 
 @Component({
-  selector: 'app-proyectos',
-  templateUrl: './proyectos.component.html',
-  styleUrls: ['./proyectos.component.sass']
+  selector: 'app-listado',
+  templateUrl: './listado.component.html'
 })
-export class ProyectosComponent implements OnInit {
+export class ListadoComponent implements OnInit {
 
   constructor(private proyectosSvc:ProyectosService) {}
 

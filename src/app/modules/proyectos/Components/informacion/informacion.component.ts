@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { of, switchMap } from 'rxjs';
 /* import { map, tap } from 'rxjs'; */
 import { ProyectosService } from '../../services/proyectos.service';
 
@@ -17,17 +18,16 @@ export class InformacionComponent {
     private proyectosSvc:ProyectosService,
     private router:Router
   ){ 
-    this.activatedRoute.params.subscribe(({id}) => {
-      this.getInformacionById(decodeURI(id+''));
+    this.activatedRoute
+    .params
+    .pipe(switchMap(({ id }) => this.proyectosSvc.getById(decodeURI(id+''))))
+    .subscribe((proyecto)=>{       
+      this.proyecto = proyecto;
     }); 
   }
 
   irAProyectos(){
     this.router.navigate(['/proyectos']);
-  }
-
-  private getInformacionById(id:string){
-    this.proyecto = this.proyectosSvc.getById(id);
   }
 
 }
