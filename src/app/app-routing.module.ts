@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProyectosModule } from './modules/proyectos/proyectos.module';
 
 const routes: Routes = [
   { 
@@ -15,11 +14,15 @@ const routes: Routes = [
   { 
     path: 'proyectos', 
     loadChildren: () => import("./modules/proyectos/proyectos.module").then(m => m.ProyectosModule) 
-  }, 
+  },
+  { 
+    path: 'register', 
+    loadChildren: () => import("./modules/register/register.module").then(m => m.RegisterModule) ,
+  },
   { 
     path: '**', 
     redirectTo: 'proyectos' 
-  }, 
+  }
 ];
 
 @NgModule({
@@ -29,3 +32,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
+

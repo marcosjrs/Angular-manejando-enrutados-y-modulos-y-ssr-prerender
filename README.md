@@ -2,12 +2,18 @@
 
 - Crea modulos y el componente principal de cada módulo
 ```
+ng new Prueba
 ng g m modules/contacto --routing
 ng g c modules/contacto
 ng g m modules/proyectos --routing
-ng g c modules/proyectos
+ng g c modules/listado
 ng g m modules/about --routing
 ng g c modules/about
+
+ng g m modules/register --routing
+ng g c modules/register/components/register
+ng g s modules/register/services/pais
+ng g interface modules/register/models/Pais
 ```
 
 - Modificar el app-routing.module.ts para cargar de forma perezosa, cada módulo...
@@ -36,7 +42,7 @@ const routes: Routes = [
 - Y dentro de cada routing de los tres modulos cargamos por defecto su componente principal, por ejemplo en el proyectos-routing.module, pondríamos:
 ```
 const routes: Routes = [
-  { path:'', component: ProyectosComponent }
+  { path:'', component: ListadoComponent }
 ]; 
 ```
 
@@ -52,7 +58,7 @@ ng g component modules/proyectos/Components/Informacion
 y se modificó el proyectos-routing.module, quedando:
 ```
 const routes: Routes = [
-  { path:'', component: ProyectosComponent },
+  { path:'', component: ListadoComponent },
   { path:'informacion/:id', component: InformacionComponent },
 ]; 
 ```
@@ -116,6 +122,43 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+## Añadido pantalla Registro
+```
+ng new Prueba
+cd Prueba
+ng g m modules/register --routing
+ng g c modules/register/components/register
+ng g s modules/register/services/pais
+ng g s modules/register/services/validadores
+ng g interface modules/register/models/Pais
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```
+app-routing.module.ts
+const routes: Routes = [
+  { 
+    path: 'register', 
+    loadChildren: () => import("./modules/register/register.module").then(m => m.RegisterModule) ,
+    pathMatch: 'full'
+  },
+  { 
+    path: '**', 
+    redirectTo: 'register' 
+  } 
+  ....
+}
+```
+
+```
+register-routing.module.ts
+const routes: Routes = [
+  { path:'', component: RegisterComponent },
+];
+```
+
+Copié los contenidos y añadi el ReactiveFormModule en los import del register.module.ts
+Añadí el HttpClientModule en el app.module.ts (de @angular/common/http)
+Borrar casi todo el contenido de app.component.html (dejar solo <router-outlet></router-outlet>)
+en el index.html añadir el 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+parar el servicio y volver a levantarlo
